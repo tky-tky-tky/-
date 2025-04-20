@@ -90,12 +90,13 @@ class SimpleApp:
 
         #行数とカウントを保存
         current_number_str = self.entry.get()
+        width = len(current_number_str)
         current_number = int(current_number_str)
 
         for file_path in file_paths:
             if os.path.isfile(file_path):
                 # ファイルをリネーム
-                new_name = f"{current_number:0{len(current_number_str)}d}{os.path.splitext(file_path)[1]}"
+                new_name = f"{current_number:0{width}d}{os.path.splitext(file_path)[1]}"
                 new_path = os.path.join(os.path.dirname(file_path), new_name)
                 os.rename(file_path, new_path)
                 print("ファイルが次の名前に変更されました:", new_path)
@@ -105,7 +106,7 @@ class SimpleApp:
 
         # カウンターの新しい値でエントリを更新
         self.entry.delete(0, tk.END)
-        self.entry.insert(0, f"{current_number:0{len(current_number_str)}d}")
+        self.entry.insert(0, f"{current_number:0{width}d}")
 
 if __name__ == "__main__":
     # アプリの起動
